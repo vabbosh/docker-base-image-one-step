@@ -1,0 +1,28 @@
+version = '2.1.1-SNAPSHOT'
+ext.artifact = "wdp"
+task buildBaseImage(type: Exec) {
+  description "Execute a docker build to build and tag a docker base image with the version in this file"
+  commandLine "docker", "build", "-t", "artifactorypilot.srv.westpac.com.au:50996/${artifact}/tomcat:${version}", "${artifact}"
+}
+
+task dockerPush(type:Exec) {
+  description "execute a docker push to push the container produced by buildBaseImage to artifactory"
+  commandLine "docker", "push", "artifactorypilot.srv.westpac.com.au:50996/${artifact}/tomcat:${version}"
+  mustRunAfter buildBaseImage
+}
+
+buildBaseImage.finalizedBy dockerPush
+
+task clean(type: Exec) {
+  description "cleans the docker image from the local repository so that you don't end up with a never ending pile of builds"
+  commandLine "docker", "rmi", "artifactorypilot.srv.westpac.com.au:50996/${artifact}/tomcat:${version}"
+  mustRunAfter dockerPush
+}
+
+dockerPush.finalizedBy clean
+
+task wrapper(type: Wrapper) {
+  description "grade internal task which produces the gradlew and gradle jar files"
+  gradleVersion = '3.2'
+  distributionUrl = "https\://services.gradle.org/distributions/gradle-${gradleVersion}-bin.zip"
+}
