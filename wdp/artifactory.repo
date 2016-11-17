@@ -1,0 +1,7 @@
+[rhel-server-rpms]
+name = Red Hat Enterprise Linux Server RPMS
+baseurl = https://artifactorypilot.srv.westpac.com.au:50990/artifactory/wdp-001_yum/docker-base
+sslverify = 0
+enabled = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-beta,file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release,file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-legacy-former,file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-legacy-release,file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-legacy-rhx
+gpgcheck = 0
