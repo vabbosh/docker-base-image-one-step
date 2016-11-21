@@ -11,4 +11,4 @@ git remote set-url origin https://github.com/containers-a8/docker-base-image-one
 Pushed the contents of the local repo to the new remote repo (our github repo)
 git push origin master
 
-
+Create the base image using the Dockefile-centos instead of the default Dockerfile (which uses RHEL)
