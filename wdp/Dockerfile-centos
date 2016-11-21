@@ -39,4 +39,4 @@ RUN groupadd -g 900 tomcat \
 
 ENV "SERVICE_TAGS=centos,jre-180u111-2b15,tomcat-858"
 
-
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
